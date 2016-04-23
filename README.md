@@ -42,4 +42,7 @@ cd ..
 java -jar dist/JMail.jar "<Email Subject>" "<email form>" "<email form password>" "<email to>" "<message file or message string>" ["<Path to file attachments>" [...] ]
 ```
 
-
+###Can download JMail.jar
+```bash
+curl -L -o JMail.jar https://raw.githubusercontent.com/hymisfit/JMail/master/dist/JMail.jar
+```
