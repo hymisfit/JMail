@@ -1,4 +1,8 @@
 # JMail
+
+##This project using Java call smtp.google.com send mail (have attachments)
+
+
 Browse URL https://www.google.com/settings/security/lesssecureapps to turn on
 
 
