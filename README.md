@@ -18,7 +18,7 @@ cd ..
 ###Compile .java to .class
 javac -d ./classes -classpath ./libs/mail-1.4.7.jar:./libs/commons-io-2.5.jar ./src/jmail/JMail.java 
 
-#Compile to dist/JMail.jar file
+###Compile to dist/JMail.jar file
 cd ./classes
 jar cfm ../dist/JMail.jar ../Manifest.txt ./jmail/*
 cd ..

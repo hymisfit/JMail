@@ -127,8 +127,11 @@ public class JMail {
         String message = args[4];
         
         // attachments
-        String[] attachFiles = new String[1];
-        attachFiles[0] = args[5];
+        String[] attachFiles = new String[args.length - 5];
+        int i;
+        for(i=0; i<args.length - 5; i++) {
+            attachFiles[i] = args[5+i];
+        }
         try {
             // Path path = Paths.get(message);
             // byte[] result = Files.readAllBytes(path);
