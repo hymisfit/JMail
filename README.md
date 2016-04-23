@@ -1,11 +1,16 @@
 # JMail
+Browse URL https://www.google.com/settings/security/lesssecureapps to turn on
+
 
 ##Prepair enviroment
+```bash
 mkdir libs
 mkdir classes
 mkdir dist
+```
 
 ###Downloads libaries
+```bash
 cd libs
 curl -L -o commons-io-2.5-bin.zip http://mirrors.viethosting.vn/apache//commons/io/binaries/commons-io-2.5-bin.zip
 unzip commons-io-2.5-bin.zip
@@ -14,17 +19,23 @@ rm -rf commons-io-2.5
 rm commons-io-2.5-bin.zip
 curl -L -o mail-1.4.7.jar http://central.maven.org/maven2/javax/mail/mail/1.4.7/mail-1.4.7.jar
 cd ..
+```
 
 ###Compile .java to .class
+```bash
 javac -d ./classes -classpath ./libs/mail-1.4.7.jar:./libs/commons-io-2.5.jar ./src/jmail/JMail.java 
+```
 
 ###Compile to dist/JMail.jar file
+```bash
 cd ./classes
 jar cfm ../dist/JMail.jar ../Manifest.txt ./jmail/*
 cd ..
+```
 
 ###Call send mail
+```bash
 java -jar dist/JMail.jar "&lt;Email Subject&gt;" "&lt;email form&gt;" "&lt;email form password&gt;" "&lt;email to&gt;" "&lt;message file or message string&gt;" ["&lt;Path to file attachments&gt;" [...] ]
-
+```
 
 
