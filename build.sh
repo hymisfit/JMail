@@ -1,4 +1,4 @@
-git clont https://github.com/hymisfit/JMail.git
+git clone https://github.com/hymisfit/JMail.git
 
 cd JMail
 #mkdir libs
