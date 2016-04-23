@@ -1,0 +1,2 @@
+Class-Path: libs/mail-1.4.7.jar libs/commons-io-2.5.jar
+Main-Class: jmail.JMail
