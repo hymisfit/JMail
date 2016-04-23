@@ -35,7 +35,7 @@ cd ..
 
 ###Call send mail
 ```bash
-java -jar dist/JMail.jar "&lt;Email Subject&gt;" "&lt;email form&gt;" "&lt;email form password&gt;" "&lt;email to&gt;" "&lt;message file or message string&gt;" ["&lt;Path to file attachments&gt;" [...] ]
+java -jar dist/JMail.jar "<Email Subject>" "<email form>" "<email form password>" "<email to>" "<message file or message string>" ["<Path to file attachments>" [...] ]
 ```
 
 

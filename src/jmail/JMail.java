@@ -105,10 +105,10 @@ public class JMail {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        // String currentDir = System.getProperty("user.dir");
-        // System.out.println("Current dir using System:" +currentDir);
+        String currentDir = System.getProperty("user.dir");
+        System.out.println("Current working dir: " +currentDir);
         
-        System.out.printf("Browse URL https://www.google.com/settings/security/lesssecureapps to turn on");
+        // System.out.println("Browse URL https://www.google.com/settings/security/lesssecureapps to turn on");
         if( args.length < 6 ) {
             System.err.println("Invalid input params");
             System.out.println("Syntax: java -jar JMail.jar subject from_mail from_pass to_mail [message_file or message_text] attach_file");
