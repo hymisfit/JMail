@@ -24,7 +24,7 @@ jar cfm ../dist/JMail.jar ../Manifest.txt ./jmail/*
 cd ..
 
 ###Call send mail
-java -jar dist/JMail.jar "Test Subject 3" "hyselab2@gmail.com"   "hy12345678"   "hy@misfit.com" "test.html"    "/Users/henry/Documents/Works/Misfit/TestTravis/EmailAttachmentSender.java"
+java -jar dist/JMail.jar "<Email Subject>" "<email form>"   "<email form password>"   "<email to>" "<message file or message string>"    ["<Path to file attachments>" [...] ]
 
 
 
