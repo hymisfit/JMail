@@ -11,6 +11,9 @@ Browse URL https://www.google.com/settings/security/lesssecureapps to turn on
 mkdir libs
 mkdir classes
 mkdir dist
+cd dist
+ln -s ../libs libs
+cd ..
 ```
 
 ###Downloads libaries

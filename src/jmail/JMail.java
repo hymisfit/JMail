@@ -7,12 +7,7 @@ package jmail;
 
 
 import java.lang.*;
-import java.io.FileInputStream;
 import java.io.File;
-import org.apache.commons.io.IOUtils;
-import java.nio.file.Paths;
-import java.nio.file.Path;
-import java.net.URL;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -32,8 +27,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 /**
  *
@@ -84,6 +77,7 @@ public class JMail {
                 try {
                     attachPart.attachFile(filePath);
                 } catch (IOException ex) {
+                    System.err.println("Can't attach file " + filePath);
                     ex.printStackTrace();
                 }
  
@@ -125,31 +119,30 @@ public class JMail {
         String mailTo = args[3];// "your-friend-email";
         String subject = args[0];// "New email with attachments";
         String message = args[4];
-        
+        String filePath = "";
         // attachments
         String[] attachFiles = new String[args.length - 5];
         int i;
         for(i=0; i<args.length - 5; i++) {
-            attachFiles[i] = args[5+i];
+            filePath = args[5+i];
+            if( filePath.indexOf("~/") == 0 ) {
+                filePath = System.getProperty("user.home") + args[5+i].substring(1);
+            }
+            attachFiles[i] = (new File(filePath)).getAbsolutePath();
         }
         try {
-            // Path path = Paths.get(message);
-            // byte[] result = Files.readAllBytes(path);
-            // String content = new String(result);
-            
+            if( message.indexOf("~/") == 0 ) {
+                message = System.getProperty("user.home") + message.substring(1);
+            }
             File file = new File(message);
-            // File file = new File(file1.getAbsolutePath());
-            // FileInputStream fisTargetFile = new FileInputStream( file );
-            // String targetFileStr = IOUtils.toString(fisTargetFile, "UTF-8");
-            // if( targetFileStr.length() > 0 ) {
             if( file.exists() && file.isFile() ) {
-                FileReader fileMessage = new FileReader(file);//.getAbsolutePath()
+                FileReader fileMessage = new FileReader(file);
                 char[] msg = new char[ (int)file.length() ];
                 int length = fileMessage.read(msg, 0, (int)file.length() );
                 message = new String(msg);
             }
         } catch(IOException io) {
-            System.out.println("Could not send email.");
+            System.out.println("Could not send email. Because can't open file " + message);
             io.printStackTrace();
             System.exit(2);
         }
@@ -160,13 +153,15 @@ public class JMail {
             System.out.println("Email sent.");
         } catch (AddressException ae) {
             System.err.println("Could not send email. AddressException " + ae.getMessage());
-            System.exit(3); // ae.printStackTrace();
+            ae.printStackTrace();
+            System.exit(3);
         } catch (MessagingException me) {
             System.err.println("Could not send email. MessagingException " + me.getMessage());
-            System.exit(4); // me.printStackTrace();
+            me.printStackTrace();
+            System.exit(4);
         } catch (Exception ex) {
             System.err.println("Could not send email. Exception " + ex.getMessage());
-            // ex.printStackTrace();
+            ex.printStackTrace();
             System.exit(5);
         }
     }    
