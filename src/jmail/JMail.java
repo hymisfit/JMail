@@ -91,6 +91,18 @@ public class JMail {
         // sends the e-mail
         Transport.send(msg);
     }
+    public static String correctPath(String filePath) {
+        String currentDir = System.getProperty("user.dir");
+        if( filePath.indexOf("~/") == 0 ) {
+            filePath = System.getProperty("user.home") + filePath.substring(1);
+        } else if( filePath.indexOf("./") == 0 )  {
+            filePath = currentDir + filePath.substring(1);
+        } else if( filePath.indexOf("../") == 0 )  {
+            filePath = currentDir + filePath.substring(2);
+        }
+        return filePath;
+    }
+    
     /**
      * @param args the command line arguments
      * 0                        1       2           3           4       5               6
@@ -98,10 +110,17 @@ public class JMail {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        java.util.Map<String, String> env = System.getenv();
+        // for (String envName : env.keySet()) {
+        //    System.out.format("%s=%s\n", envName, env.get(envName));
+        // }
         
-        String currentDir = System.getProperty("user.dir");
+        String currentDir = env.get("WORK_DIR");
+        // System.out.println("PRO_DIR: " + (currentDir == null ? "NULL" : currentDir) );
+        currentDir = (currentDir == null) ? System.getProperty("user.dir") : currentDir;
         System.out.println("Current working dir: " +currentDir);
-        
+        // System.exit(1);
+
         // System.out.println("Browse URL https://www.google.com/settings/security/lesssecureapps to turn on");
         if( args.length < 6 ) {
             System.err.println("Invalid input params");
@@ -124,16 +143,11 @@ public class JMail {
         String[] attachFiles = new String[args.length - 5];
         int i;
         for(i=0; i<args.length - 5; i++) {
-            filePath = args[5+i];
-            if( filePath.indexOf("~/") == 0 ) {
-                filePath = System.getProperty("user.home") + args[5+i].substring(1);
-            }
+            filePath = correctPath(args[5+i]);
             attachFiles[i] = (new File(filePath)).getAbsolutePath();
         }
         try {
-            if( message.indexOf("~/") == 0 ) {
-                message = System.getProperty("user.home") + message.substring(1);
-            }
+            message = correctPath(message);
             File file = new File(message);
             if( file.exists() && file.isFile() ) {
                 FileReader fileMessage = new FileReader(file);

@@ -30,6 +30,10 @@ cd ..
 
 ###Compile .java to .class
 ```bash
+# clean old compile
+rm -rf ./classes/*
+rm dist/JMail.jar
+# compile code
 javac -d ./classes -classpath ./libs/mail-1.4.7.jar:./libs/commons-io-2.5.jar ./src/jmail/JMail.java 
 ```
 
@@ -42,7 +46,11 @@ cd ..
 
 ###Call send mail
 ```bash
+# read file message or attach files from current dir of dist/JMail.jar file
 java -jar dist/JMail.jar "<Email Subject>" "<email form>" "<email form password>" "<email to>" "<message file or message string>" ["<Path to file attachments>" [...] ]
+
+# read file message or attach files from WORK_DIR enviroment
+WORK_DIR=`pwd` java -jar dist/JMail.jar "<Email Subject>" "<email form>" "<email form password>" "<email to>" "<message file or message string>" ["<Path to file attachments>" [...] ]
 ```
 
 ###Can download JMail.jar
