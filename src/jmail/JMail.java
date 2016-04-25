@@ -54,10 +54,19 @@ public class JMail {
  
         // creates a new e-mail message
         Message msg = new MimeMessage(session);
- 
+        
+        String[] address = toAddress.split(":CC=");
+        toAddress = address[0];
+        InternetAddress[] ccAddress = new InternetAddress[address.length-1];
+        if( address.length > 1 ) {
+            for(int i=1; i<address.length; i++) {
+                ccAddress[i-1] = new InternetAddress(address[i]);
+            }
+        }
         msg.setFrom(new InternetAddress(userName));
         InternetAddress[] toAddresses = { new InternetAddress(toAddress) };
         msg.setRecipients(Message.RecipientType.TO, toAddresses);
+        msg.setRecipients(Message.RecipientType.CC, ccAddress);
         msg.setSubject(subject);
         msg.setSentDate(new Date());
  

@@ -47,10 +47,12 @@ cd ..
 ###Call send mail
 ```bash
 # read file message or attach files from current dir of dist/JMail.jar file
-java -jar dist/JMail.jar "<Email Subject>" "<email form>" "<email form password>" "<email to>" "<message file or message string>" ["<Path to file attachments>" [...] ]
+java -jar dist/JMail.jar "<Email Subject>" "<email form>" "<email form password>" "<emailTo>" "<message file or message string>" ["<Path to file attachments>" [...] ]
+java -jar dist/JMail.jar "<Email Subject>" "<email form>" "<email form password>" "<emailTo:CC=ccEmail1:CC=ccEmail2>" "<message file or message string>" ["<Path to file attachments>" [...] ]
 
 # read file message or attach files from WORK_DIR enviroment
-WORK_DIR=`pwd` java -jar dist/JMail.jar "<Email Subject>" "<email form>" "<email form password>" "<email to>" "<message file or message string>" ["<Path to file attachments>" [...] ]
+WORK_DIR=`pwd` java -jar dist/JMail.jar "<Email Subject>" "<email form>" "<email form password>" "<emailTo>" "<message file or message string>" ["<Path to file attachments>" [...] ]
+WORK_DIR=`pwd` java -jar dist/JMail.jar "<Email Subject>" "<email form>" "<email form password>" "<emailTo:CC=ccEmail1:CC=ccEmail2>" "<message file or message string>" ["<Path to file attachments>" [...] ]
 ```
 
 ###Can download JMail.jar
